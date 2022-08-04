@@ -1,26 +1,238 @@
-body {
-    display:flex;
-    margin:0px;
-}
-#formulario{
-    display:flex;
-    flex-direction: column;
-    
-    width:30%;
-    background-color: rgb(219, 246, 237);
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
 
+:root {
+    --primary-color: #D92344;
+    --secondary-color: #9f8bbb;
+    --tertiary-color: #F29B30;
+    --primary-bg-color: #F5F5F5;
+    --secondary-bg-color: #f8e9c1;
+    --tertiary-bg-color: #f5bec8;
+    --border-color: #A4B5BF;
+    --font-color: #252526;
+   
 }
-#quadroDicas{
-    display:flex;
-    width:100%;
+
+* {
+    font-family: 'Titillium Web', sans-serif;
+    ;
+    color: var(--font-color)
+}
+
+body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+    background-color: var(--tertiary-bg-color);
+}
+
+#direita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 450px;
+    height: 800px;
+    padding: 0px;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    border-style: dotted;
+    border-color: var(--primary-color) ;
+}
+
+#cabeçalho {
+    display: flex;
+    height: 12%;
+}
+
+#livro {
+    height: 100px;
+    padding-right: 10px;
+}
+
+h1 {
+    font-size: 35px;
+}
+
+span {
+    font-size: 50px;
+}
+
+#formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--secondary-color);
+    height: 88%;
+    overflow: hidden;
+}
+
+form {
+    border-radius: 0px;
+}
+
+form,
+input {
+    background-color: var(--primary-bg-color);
+    border-style: none;
+    width: 80%;
+    border-radius: 15px;
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px 20px;
+}
+
+form,
+label {
+    font-size: 30px;
+    margin: 5px;
+}
+
+form,
+select {
+    background-color: var(--primary-bg-color);
+    font-size: 20px;
+    border-radius: 15px;
+    padding: 0px 20px;
+    width: 90%;
+}
+
+textarea {
+    background-color: var(--primary-bg-color);
+    width: 90%;
+    height: 500px;
+    resize: none;
+    font-size: 20px;
+    border-radius: 15px;
+}
+
+#btnLimpar {
+    font-size: 25px;
+    margin: 20px;
+    padding: 0px 20px;
+}
+
+#btnSalvar {
+    font-size: 25px;
+    margin: 20px;
+    padding: 0px 20px;
+}
+
+#esquerda {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 800px;
+    margin: 10px;
+    padding: 20px;
+    background-color: var(--secondary-bg-color);
+    border-radius: 15px;
+    border-style: dotted;
+    border-color: var(--primary-color) ;
     
-    background-color: aquamarine;
+}
+
+#buscar {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    align-items: flex-start;
+}
+
+#pesquisar {
+    height: 45px;
+}
+
+#lupa {
+    width: 48px;
+    height: 48px;
+    margin: 0px 10px;
+}
+
+#lupa>img {
+    width: 30px;
+}
+
+#fechar {
+    width: 48px;
+    height: 48px;
+    margin: 0px 10px;
+}
+
+#fechar>img {
+    width: 30px;
+}
+
+#numeros {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: 100px;
+    padding:0px;
+}
+
+#numeros li {
+    background-color: var(--primary-bg-color);
+    width: 80px;
+    text-align: center;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+
+#quadroDicas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    border-radius: 15px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .cartao {
-    border-style: solid;
-    border-color:black;
-    color: red;
-    width: 30%;
-    height:30%;
+    border-style: none;
+    background-color: var(--primary-bg-color);
+    min-height: 300px;
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    word-wrap: break-word;
+}
+
+.btnEditar {
+    font-size: 20px;
+    margin: 10px;
+    padding: 0px 10px;
+}
+
+.btnDeletar {
+    font-size: 20px;
+    margin: 10px;
+    padding: 0px 10px;
+}
+
+.btnDeletar>img {
+    width: 20px;
+}
+
+.btnVideo{
+    width:20px;
+}
+
+.btnDestacar {
+    font-size: 20px;
+    margin: 10px;
+    padding: 0px 10px;
+}
+
+
+.cartao h3 {
+    font-size: 24px;
+}
+
+.cartao p {
+    font-size: 20px;
 }

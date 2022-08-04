@@ -1,46 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEVinKnowledge</title>
     <script type="module" src="app.js"></script>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="formulario">
-    <label for="titulo">Título</label> <br>
-    <input type = "text" id="titulo"><br>
-    <label for="linguagem">Linguagem/Skill</label> <br>
-    <input type = "text" id="linguagem"><br>
-    <label for="categoria">Categoria</label> <br>
-    <select id="categoria">
-        <option value="frontEnd">FrontEnd</option>
-        <option value="backEnd">BackEnd</option>
-        <option value="fullStack">FullStack</option>
-        <option value="softSkill">SoftSkill</option>
-    </select><br>
-    <label for = "descricao">Descrição</label><br>
-    <textarea></textarea><br>
-    <label for = "video">Vídeo do YouTube*</label><br>
-    <input type="url" id="video"><br>
-    <button id="btnLimpar">Limpar</button>
-    <button id="btnSalvar">Salvar</button>
+    <div id="direita">
 
-</div>
-<div id="quadroDicas">
+        <div id="cabeçalho">
+            <img src="img/book.png" alt="Imagem" id="livro">
+            <h1>DEVin <span>Knowledge</span> </h1>
+        </div>
 
-</div>
+        <form id="formulario">
+
+            <label for="titulo">Título</label>
+            <input type="text" name="titulo" id="titulo" placeholder="Insira um título" minLength="4" maxLength="28"
+                required>
+
+            <label for="linguagem">Linguagem/Skill</label>
+            <input type="text" name="linguagem" id="linguagem" placeholder="Insira uma linguagem" maxLength="28" required>
+
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria" required>
+                <option value="" id="selecionar">Selecionar</option>
+                <option value="FrontEnd">FrontEnd</option>
+                <option value="BackEnd">BackEnd</option>
+                <option value="FullStack">FullStack</option>
+                <option value="SoftSkill">SoftSkill</option>
+            </select>
+
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" minLength="8" maxLength="200" required></textarea>
+
+            <label for="video">Vídeo do YouTube*</label>
+            <input type="url" id="video" placeholder="Link opcional">
+
+            <div id="botoes">
+                <button type="reset" id="btnLimpar">Limpar</button>
+                <button type="submit" id="btnSalvar">Salvar</button>
+            </div>
+
+        </form>
+    </div>
 
 
+    <div id="esquerda">
+        <div id="buscar">
+            <input type="text" id="pesquisar">
+            <button id="lupa">
+                <img src="img/search.png" alt="Pesquisar">
+            </button>
+            <button id="fechar">
+                <img src="img/close.png" alt="Limpar">
+            </button>
+        </div>
+        <ul id="numeros" type="none">
+            <li>
+                <h3>Total</h3>
+                <p id="total"></p>
+            </li>
 
-<div id="estatistica"></div>
+            <li>
+                <h3>FrontEnd</h3>
+                <p id="total"></p>
+            </li>
 
-<div id="buscar"></div>
+            <li>
+                <h3> BackEnd</h3>
+            </li>
 
+            <li>
+                <h3> FullStack</h3>
+            </li>
+
+            <li>
+                <h3> SoftSkill</h3>
+            </li>
+        </ul>
+
+
+        <ul id="quadroDicas" type="none">
+          
+
+        </ul>
+
+    </div>
     
 
-
 </body>
+
 </html>
