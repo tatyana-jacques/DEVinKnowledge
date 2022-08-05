@@ -9,7 +9,6 @@
     --tertiary-bg-color: #f5bec8;
     --border-color: #A4B5BF;
     --font-color: #252526;
-   
 }
 
 * {
@@ -130,9 +129,14 @@ textarea {
     border-radius: 15px;
     border-style: dotted;
     border-color: var(--primary-color) ;
-    
 }
 
+#tipoBusca  {
+    margin: 10px 20px;
+    width: 50%;
+    border-style: none;
+   
+}
 #buscar {
     display: flex;
     justify-content: space-around;
@@ -173,7 +177,6 @@ textarea {
     height: 40px;
     padding:20px;
     
-   
 }
 
 #numeros li {
@@ -183,8 +186,6 @@ textarea {
     margin: 5px;
     padding:0px;
     background-color: var(--primary-bg-color);
-
-   
 }
 
 #numeros h3 {
@@ -197,24 +198,23 @@ textarea {
     margin: 0px 5px 5px 5px;
 }
 
-
 #quadroDicas {
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+    overflow-x: hidden;
     border-radius: 15px;
-    padding: 0px;
-    margin: 0px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .cartao {
     border-style: none;
     background-color: var(--primary-bg-color);
-    min-height: 300px;
-    width: 90%;
+    width: 85%;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     border-radius: 15px;
     word-wrap: break-word;
 }
@@ -244,7 +244,6 @@ textarea {
     margin: 10px;
     padding: 0px 10px;
 }
-
 
 .cartao h3 {
     font-size: 24px;

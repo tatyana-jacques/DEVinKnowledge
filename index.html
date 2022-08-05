@@ -22,11 +22,12 @@
         <form id="formulario">
 
             <label for="titulo">Título</label>
-            <input type="text" name="titulo" id="titulo" placeholder="Insira um título" minLength="4" maxLength="28"
+            <input type="text" name="titulo" id="titulo" placeholder="Insira um título" minLength="8" maxLength="64"
                 required>
 
             <label for="linguagem">Linguagem/Skill</label>
-            <input type="text" name="linguagem" id="linguagem" placeholder="Insira uma linguagem" maxLength="28" required>
+            <input type="text" name="linguagem" id="linguagem" placeholder="Insira uma linguagem" minLength="4"
+                maxLength="16" required>
 
             <label for="categoria">Categoria</label>
             <select id="categoria" name="categoria" required>
@@ -38,7 +39,7 @@
             </select>
 
             <label for="descricao">Descrição</label>
-            <textarea id="descricao" name="descricao" minLength="8" maxLength="200" required></textarea>
+            <textarea id="descricao" name="descricao" minLength="32" maxLength="512" required></textarea>
 
             <label for="video">Vídeo do YouTube*</label>
             <input type="url" id="video" placeholder="Link opcional">
@@ -53,6 +54,8 @@
 
 
     <div id="esquerda">
+
+
         <div id="buscar">
             <input type="text" id="pesquisar">
             <button id="lupa">
@@ -62,41 +65,27 @@
                 <img src="img/close.png" alt="Limpar">
             </button>
         </div>
-        <ul id="numeros" type="none">
-            <!-- <li >
-                <h3>Total</h3>
-                <p id="total"></p>
-            </li>
 
-            <li>
-                <h3>FrontEnd</h3>
-                <p id="frontEnd"></p>
-            </li>
+        <select id="tipoBusca" name=tipoBusca>
+            <option value="">Tipo de busca</option>
+            <option value="buscarTitulo">Titulo</option>
+            <option value="buscarLinguagem">Linguagem</option>
+            <option value="buscarCategoria">Categoria</option>
+            <option value="buscarDescricao">Descrição</option>
+            <option value="buscarTudo">Todos os campos</option>
 
-            <li>
-                <h3> BackEnd</h3>
-                <p id="backEnd"></p>
-            </li>
-
-            <li>
-                <h3> FullStack</h3>
-                <p id="fullStack"></p>
-            </li>
-
-            <li>
-                <h3> SoftSkill</h3>
-                <p id="softSkill"></p>
-            </li> -->
-        </ul>
+        </select>
 
 
-        <ul id="quadroDicas" type="none">
-          
 
-        </ul>
+
+        <ul id="numeros" type="none"> </ul>
+
+
+        <ul id="quadroDicas" type="none"></ul>
 
     </div>
-    
+
 
 </body>
 

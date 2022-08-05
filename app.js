@@ -6,9 +6,10 @@ const docVideo = document.getElementById("video")
 const btnSalvar = document.getElementById("btnSalvar")
 const btnLimpar = document.getElementById("btnLimpar")
 const quadroDicas = document.getElementById("quadroDicas")
-const ulNumeros = document.getElementById("numeros")
+const pesquisa = document.getElementById("pesquisar")
 const btnBuscar = document.getElementById("lupa")
 const btnLimparBusca = document.getElementById("fechar")
+const ulNumeros = document.getElementById("numeros")
 
 let listaDicas = []
 
@@ -37,7 +38,7 @@ function validarFormulario() {
     //     atualizarFormulario()
     // }
     atualizarFormulario()
-    setTimeout(() => alert("Cartão salvo com sucesso!"), 600)
+    setTimeout(() => alert("Cartão salvo com sucesso!"), 100)
 }
 
 
@@ -53,48 +54,48 @@ function atualizarFormulario() {
 
     listaDicas.push(linha)
 
-    montarLista()
+    montarLista(listaDicas)
     limparCampos()
 }
 
 
-function montarLista() {
+function montarLista(lista) {
 
     quadroDicas.innerHTML = " "
 
-    listaDicas.forEach((item, index) => {
+    lista.forEach((item) => {
         const cartao = document.createElement("li")
         cartao.classList.add('cartao')
 
         const novoTitulo = document.createElement("h3")
-        novoTitulo.innerText = listaDicas[index].objTitulo
+        novoTitulo.innerText = item.objTitulo
 
         const novaLinguagem = document.createElement("p")
-        novaLinguagem.innerHTML = `<strong>Linguagem/Skill:</strong> ${listaDicas[index].objLinguagem}`
+        novaLinguagem.innerHTML = `<strong>Linguagem/Skill:</strong> ${item.objLinguagem}`
 
         const novaCategoria = document.createElement("p")
-        novaCategoria.innerHTML = `<strong>Categoria: </strong>${listaDicas[index].objCategoria}`
+        novaCategoria.innerHTML = `<strong>Categoria: </strong>${item.objCategoria}`
 
         const novaDescricao = document.createElement("p")
-        novaDescricao.innerHTML = listaDicas[index].objDescricao
+        novaDescricao.innerHTML = item.objDescricao
 
         const novoVideo = document.createElement("button")
         const btnVideo = document.createElement("img")
         btnVideo.src = "img/youtube.png"
         btnVideo.classList.add("btnVideo")
-        novoVideo.addEventListener("click", () => window.open(listaDicas[index].objVideo))
+        novoVideo.addEventListener("click", () => window.open(item.objVideo))
 
         const editar = document.createElement("button")
         editar.innerText = "Editar"
         editar.classList.add("btnEditar")
-        editar.addEventListener("click", (() => editarCartao(index)))
+        editar.addEventListener("click", (() => editarCartao(item)))
 
         const deletar = document.createElement("button")
         const lixeira = document.createElement("img")
         lixeira.src = "img/trash.png"
         deletar.classList.add("btnDeletar")
         deletar.addEventListener("click", (() => {
-            removerCartao(index)
+            removerCartao(item)
         }))
 
         const destacar = document.createElement("button")
@@ -111,7 +112,7 @@ function montarLista() {
         cartao.appendChild(editar)
         cartao.appendChild(destacar)
 
-        if (listaDicas[index].objVideo !== "") {
+        if (item.objVideo !== "") {
             cartao.appendChild(novoVideo)
             novoVideo.appendChild(btnVideo)
         }
@@ -123,13 +124,14 @@ function montarLista() {
     salvarDicas()
 }
 
+
 function estatisticas() {
 
     ulNumeros.innerHTML = " "
     let totalEstatisticas = 0
     let totalFrontEnd = 0
     let totalBackEnd = 0
-    let totalFullStack=0
+    let totalFullStack = 0
     let totalSoftSkills = 0
 
     const totalLinha = document.createElement("li")
@@ -169,14 +171,12 @@ function estatisticas() {
             totalBackEnd++
         }
 
-        else if (listaDicas[index].objCategoria==="FullStack")
-        {
+        else if (listaDicas[index].objCategoria === "FullStack") {
             totalFullStack++
         }
 
-        else 
-        {
-            totalSoftSkills ++
+        else {
+            totalSoftSkills++
         }
     })
 
@@ -218,21 +218,17 @@ function estatisticas() {
 
 
 
-    
+
 
 }
 
 
 function removerCartao(indice) {
     const response = confirm("Você tem certeza que deseja deletar essa dica?")
-
-    
-    if (response)
-    {
-    const novaLista = listaDicas.filter((i, index) => index !== indice)
-    listaDicas = novaLista
-    salvarDicas()
-    montarLista()
+    if (response) {
+        listaDicas = listaDicas.filter((item) => item !== indice)
+        salvarDicas()
+        montarLista(listaDicas)
     }
 
 }
@@ -246,6 +242,7 @@ function limparCampos() {
     docVideo.value = null
 }
 
+
 function verificarVideo() {
     const verificar = docVideo.value.includes("https://www.youtube.com")
     return verificar
@@ -253,50 +250,57 @@ function verificarVideo() {
 
 
 function editarCartao(indice) {
-    const cartaoEditar = listaDicas.find((index) => index === indice)
-    
-    document.getElementById("titulo").value = listaDicas[indice].objTitulo
-    console.log("editou")
+    const resposta = confirm("Você tem certeza que deseja editar essa dica?")
 
-    const novaLista = listaDicas.filter((i, index) => index !== indice)
-    listaDicas = novaLista
-    salvarDicas()
-    montarLista()
-
-    
-        //     //listaDicas[index].objTitulo
-
-        // function atualizarTela(){
-        //     quadroDicas.innerHTML = ""
-        //     listaDicas.filter ((item) => listaDicas.objTitulo)
-        //     .toLocaleLowerCase()
-        //     .includes()
-
-
-        //}
-
+    if (resposta) {
+        listaDicas.find((item) => { (item === indice)
+        document.getElementById("titulo").value = item.objTitulo
+        document.getElementById("linguagem").value = item.objLinguagem
+        document.getElementById("categoria").value = item.objCategoria
+        document.getElementById("descricao").value = item.objDescricao
+        document.getElementById("video").value = item.objVideo})
+        
+        listaDicas = listaDicas.filter((item) => item !== indice)
+        salvarDicas()
+        montarLista(listaDicas)
     }
+}
+
+function buscarDica (){
+
+   const listaBuscaTitulo = listaDicas.filter((item) => item.objTitulo
+   .toLocaleLowerCase()
+   .includes(pesquisa.value.toLocaleLowerCase()))
+
+
+   quadroDicas.innerHTML = ""
+   montarLista(listaBuscaTitulo) 
    
 
 
+}
 
 function salvarDicas() {
     const listaDicasJSON = JSON.stringify(listaDicas)
     localStorage.setItem("listaDicas", listaDicasJSON)
 }
 
+
 function carregarDicas() {
     const listaSalvaJSON = localStorage.getItem("listaDicas")
 
     if (listaSalvaJSON !== null) {
         listaDicas = JSON.parse(listaSalvaJSON)
-        montarLista()
+        montarLista(listaDicas)
     }
 }
 
+btnLimpar.addEventListener("click", limparCampos)
 btnSalvar.addEventListener("click", (event) => {
     event.preventDefault()
     validarFormulario()
 })
-btnLimpar.addEventListener("click", limparCampos)
-//btnLimpar.addEventListener ("click", estatisticas)
+btnBuscar.addEventListener("click",buscarDica )
+btnLimparBusca.addEventListener("click", buscarDica)
+
+
