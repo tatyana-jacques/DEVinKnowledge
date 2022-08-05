@@ -138,6 +138,7 @@ textarea {
     justify-content: space-around;
     padding: 20px;
     align-items: flex-start;
+    height:30px;
 }
 
 #pesquisar {
@@ -166,18 +167,34 @@ textarea {
 
 #numeros {
     display: flex;
-    justify-content: space-around;
+    justify-content:flex-start;
+    align-content:center;
     flex-wrap: wrap;
-    height: 100px;
-    padding:0px;
+    height: 40px;
+    padding:20px;
+    
+   
 }
 
 #numeros li {
-    background-color: var(--primary-bg-color);
     width: 80px;
     text-align: center;
     border-radius: 15px;
     margin: 5px;
+    padding:0px;
+    background-color: var(--primary-bg-color);
+
+   
+}
+
+#numeros h3 {
+    margin: 5px;
+    padding:0px;
+}
+
+#numeros p {
+    font-size: 20px;
+    margin: 0px 5px 5px 5px;
 }
 
 
