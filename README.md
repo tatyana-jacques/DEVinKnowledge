@@ -1,6 +1,6 @@
 **OBSERVAÇÕES SOBRE O PROJETO:
 
-1.Preferi utilizar a tag script no final do projeto ao invés de utilizar o “type: module” para que o projeto possa ser aberto diretamente pelo navegador. 
+1.Preferi utilizar a tag script no final do arquivo em HTML ao invés de utilizar o “type: module” para que o projeto possa ser aberto diretamente pelo navegador. 
 
 2.A função para a exibição das estatísticas ficou longa, mas isso deveu-se, em grande parte, ao fato de que ela cria os campos com os números de entradas para cada categoria de forma dinâmica. 
 
