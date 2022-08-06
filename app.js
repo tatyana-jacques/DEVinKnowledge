@@ -1,3 +1,5 @@
+
+
 const docTitulo = document.getElementById("titulo")
 const docLinguagem = document.getElementById("linguagem")
 const docCategoria = document.getElementById("categoria")
@@ -9,6 +11,7 @@ const quadroDicas = document.getElementById("quadroDicas")
 const pesquisa = document.getElementById("pesquisar")
 const btnBuscar = document.getElementById("lupa")
 const btnLimparBusca = document.getElementById("fechar")
+const tipoBusca = document.getElementById("tipoBusca")
 const ulNumeros = document.getElementById("numeros")
 
 let listaDicas = []
@@ -58,7 +61,6 @@ function atualizarFormulario() {
     limparCampos()
 }
 
-
 function montarLista(lista) {
 
     quadroDicas.innerHTML = " "
@@ -101,7 +103,10 @@ function montarLista(lista) {
         const destacar = document.createElement("button")
         destacar.innerText = "Destacar"
         destacar.classList.add("btnDestacar")
-
+        destacar.addEventListener("click", (() => {
+            destaque(item)
+        }))
+       
         cartao.appendChild(novoTitulo)
         cartao.appendChild(novaLinguagem)
         cartao.appendChild(novaCategoria)
@@ -253,30 +258,90 @@ function editarCartao(indice) {
     const resposta = confirm("Você tem certeza que deseja editar essa dica?")
 
     if (resposta) {
-        listaDicas.find((item) => { (item === indice)
-        document.getElementById("titulo").value = item.objTitulo
-        document.getElementById("linguagem").value = item.objLinguagem
-        document.getElementById("categoria").value = item.objCategoria
-        document.getElementById("descricao").value = item.objDescricao
-        document.getElementById("video").value = item.objVideo})
-        
+        listaDicas.find((item) => {
+            (item === indice)
+            document.getElementById("titulo").value = item.objTitulo
+            document.getElementById("linguagem").value = item.objLinguagem
+            document.getElementById("categoria").value = item.objCategoria
+            document.getElementById("descricao").value = item.objDescricao
+            document.getElementById("video").value = item.objVideo
+        })
+
         listaDicas = listaDicas.filter((item) => item !== indice)
         salvarDicas()
         montarLista(listaDicas)
     }
 }
 
-function buscarDica (){
+function buscarDica() {
 
-   const listaBuscaTitulo = listaDicas.filter((item) => item.objTitulo
-   .toLocaleLowerCase()
-   .includes(pesquisa.value.toLocaleLowerCase()))
+    const listaBuscaTitulo = listaDicas.filter((item) => item.objTitulo
+        .toLocaleLowerCase()
+        .includes(pesquisa.value.toLocaleLowerCase()))
 
+    const listaBuscaLinguagem = listaDicas.filter((item) => item.objLinguagem
+        .toLocaleLowerCase()
+        .includes(pesquisa.value.toLocaleLowerCase()))
 
-   quadroDicas.innerHTML = ""
-   montarLista(listaBuscaTitulo) 
+    const listaBuscaCategoria = listaDicas.filter((item) => item.objCategoria
+        .toLocaleLowerCase()
+        .includes(pesquisa.value.toLocaleLowerCase()))
+
+    const listaBuscaDescricao = listaDicas.filter((item) => item.objDescricao
+        .toLocaleLowerCase()
+        .includes(pesquisa.value.toLocaleLowerCase()))
+
+        const listaDefault = [...listaBuscaTitulo, ...listaBuscaLinguagem,...listaBuscaCategoria, ...listaBuscaDescricao ]
+
+    switch (tipoBusca.value) {
+        case "buscarTitulo":
+            quadroDicas.innerHTML = ""
+            montarLista(listaBuscaTitulo)
+            break
+        case "buscarLinguagem":
+            quadroDicas.innerHTML = ""
+            montarLista(listaBuscaLinguagem)
+            break
+        case "buscarCategoria":
+            quadroDicas.innerHTML = ""
+            montarLista(listaBuscaCategoria)
+            break
+            case "buscarDescricao":
+                quadroDicas.innerHTML = ""
+                montarLista(listaBuscaDescricao)
+                break
+                default:
+                    quadroDicas.innerHTML = ""
+                    montarLista(listaDefault)
+                    break;
+    }
+    
+}
+
+function fecharBusca() {
+    quadroDicas.innerHTML = ""
+    tipoBusca.value=null
+    pesquisa.value=null
+    montarLista(listaDicas)
+}
+
+function destaque(indice){
+    const dicaDestaque = listaDicas.filter((item) => item === indice)
+    //listaDicas[0]=dicaDestaque[0]
+    const outrasDicas = listaDicas.filter((item) => item !== indice)
+    listaDicas = [...dicaDestaque, ...outrasDicas]
+    // for (let i = 0; i++; listaDicas.lenght)
+    // {
+
+    //     outrasDicas[i+1].objTitulo=outrasDicas[i].objTitulo
+    //     console.log(outrasDicas[i])
+    // }
+    
    
 
+    // salvarDicas()
+    montarLista(listaDicas)
+    console.log(listaDicas)
 
 }
 
@@ -300,7 +365,5 @@ btnSalvar.addEventListener("click", (event) => {
     event.preventDefault()
     validarFormulario()
 })
-btnBuscar.addEventListener("click",buscarDica )
-btnLimparBusca.addEventListener("click", buscarDica)
-
-
+btnBuscar.addEventListener("click", buscarDica)
+btnLimparBusca.addEventListener("click", fecharBusca)
