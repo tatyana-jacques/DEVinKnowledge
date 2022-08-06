@@ -1,5 +1,3 @@
-
-
 const docTitulo = document.getElementById("titulo")
 const docLinguagem = document.getElementById("linguagem")
 const docCategoria = document.getElementById("categoria")
@@ -18,35 +16,31 @@ let listaDicas = []
 
 carregarDicas()
 
-
 function validarFormulario() {
 
-    //     if (docTitulo.value ===""){
-    //         alert("Preencha o campo título!")
-    //     }
-    //     else if (docLinguagem.value ===""){
-    //         alert ("Preencha o campo linguagem!")
-    //     }
-    //     else if (docCategoria.value ===""){
-    //         alert ("Escolha uma categoria!")
-    //     }
-    //     else if (docDescricao.value ===""){
-    //         alert ("Preencha o campo descrição!")
-    //     }
-    //     else if (docVideo.value !=="" && !verificarVideo()){
-    //     alert ("O link deve levar ao YouTube!")
-    //     }
+    if (docTitulo.value === "") {
+        alert("Preencha o campo título!")
+    }
+    else if (docLinguagem.value === "") {
+        alert("Preencha o campo linguagem!")
+    }
+    else if (docCategoria.value === "") {
+        alert("Escolha uma categoria!")
+    }
+    else if (docDescricao.value === "") {
+        alert("Preencha o campo descrição!")
+    }
+    else if (docVideo.value !== "" && !docVideo.value.includes("https://www.youtube.com")) {
+        alert("O link deve levar ao YouTube!")
+    }
 
-    // else {
-    //     atualizarFormulario()
-    // }
-    atualizarFormulario()
-    setTimeout(() => alert("Cartão salvo com sucesso!"), 100)
+    else {
+        atualizarFormulario()
+        setTimeout(() => alert("Cartão salvo com sucesso!"), 100)
+    }
 }
 
-
 function atualizarFormulario() {
-
     const linha = {
         objTitulo: docTitulo.value,
         objLinguagem: docLinguagem.value,
@@ -85,50 +79,43 @@ function montarLista(lista) {
         const btnVideo = document.createElement("img")
         btnVideo.src = "img/youtube.png"
         btnVideo.classList.add("btnVideo")
-        novoVideo.addEventListener("click", () => window.open(item.objVideo))
 
         const editar = document.createElement("button")
         editar.innerText = "Editar"
         editar.classList.add("btnEditar")
-        editar.addEventListener("click", (() => editarCartao(item)))
 
         const deletar = document.createElement("button")
         const lixeira = document.createElement("img")
         lixeira.src = "img/trash.png"
         deletar.classList.add("btnDeletar")
-        deletar.addEventListener("click", (() => {
-            removerCartao(item)
-        }))
 
         const destacar = document.createElement("button")
         destacar.innerText = "Destacar"
         destacar.classList.add("btnDestacar")
-        destacar.addEventListener("click", (() => {
-            destaque(item)
-        }))
-       
+
         cartao.appendChild(novoTitulo)
         cartao.appendChild(novaLinguagem)
         cartao.appendChild(novaCategoria)
         cartao.appendChild(novaDescricao)
-
         cartao.appendChild(deletar)
         deletar.appendChild(lixeira)
         cartao.appendChild(editar)
         cartao.appendChild(destacar)
-
+        quadroDicas.append(cartao)
         if (item.objVideo !== "") {
             cartao.appendChild(novoVideo)
             novoVideo.appendChild(btnVideo)
         }
 
-        quadroDicas.append(cartao)
+        deletar.addEventListener("click", (() => { removerCartao(item) }))
+        editar.addEventListener("click", (() => editarCartao(item)))
+        destacar.addEventListener("click", (() => { destaque(item) }))
+        novoVideo.addEventListener("click", () => window.open(item.objVideo))
     })
 
     estatisticas()
     salvarDicas()
 }
-
 
 function estatisticas() {
 
@@ -164,27 +151,23 @@ function estatisticas() {
     softSkillsTitulo.innerHTML = "SoftSkills"
     const softSkills = document.createElement("p")
 
-
-    listaDicas.forEach((item, index) => {
+    listaDicas.forEach((item) => {
         totalEstatisticas++
-
-        if (listaDicas[index].objCategoria === "FrontEnd") {
-            totalFrontEnd++
-        }
-
-        else if (listaDicas[index].objCategoria === "BackEnd") {
-            totalBackEnd++
-        }
-
-        else if (listaDicas[index].objCategoria === "FullStack") {
-            totalFullStack++
-        }
-
-        else {
-            totalSoftSkills++
+        switch (item.objCategoria) {
+            case "FrontEnd":
+                totalFrontEnd++
+                break
+            case "BackEnd":
+                totalBackEnd++
+                break
+            case "FullStack":
+                totalFullStack++
+                break
+            default:
+                totalSoftSkills++
+                break
         }
     })
-
 
     if (totalEstatisticas !== 0) {
         total.innerHTML = totalEstatisticas
@@ -220,13 +203,7 @@ function estatisticas() {
         softSkillsLinha.appendChild(softSkillsTitulo)
         softSkillsLinha.appendChild(softSkills)
     }
-
-
-
-
-
 }
-
 
 function removerCartao(indice) {
     const response = confirm("Você tem certeza que deseja deletar essa dica?")
@@ -235,9 +212,7 @@ function removerCartao(indice) {
         salvarDicas()
         montarLista(listaDicas)
     }
-
 }
-
 
 function limparCampos() {
     docTitulo.value = null
@@ -246,13 +221,6 @@ function limparCampos() {
     docDescricao.value = null
     docVideo.value = null
 }
-
-
-function verificarVideo() {
-    const verificar = docVideo.value.includes("https://www.youtube.com")
-    return verificar
-}
-
 
 function editarCartao(indice) {
     const resposta = confirm("Você tem certeza que deseja editar essa dica?")
@@ -291,7 +259,7 @@ function buscarDica() {
         .toLocaleLowerCase()
         .includes(pesquisa.value.toLocaleLowerCase()))
 
-        const listaDefault = [...listaBuscaTitulo, ...listaBuscaLinguagem,...listaBuscaCategoria, ...listaBuscaDescricao ]
+    const listaDefault = [...listaBuscaTitulo, ...listaBuscaLinguagem, ...listaBuscaCategoria, ...listaBuscaDescricao]
 
     switch (tipoBusca.value) {
         case "buscarTitulo":
@@ -306,40 +274,29 @@ function buscarDica() {
             quadroDicas.innerHTML = ""
             montarLista(listaBuscaCategoria)
             break
-            case "buscarDescricao":
-                quadroDicas.innerHTML = ""
-                montarLista(listaBuscaDescricao)
-                break
-                default:
-                    quadroDicas.innerHTML = ""
-                    montarLista(listaDefault)
-                    break;
+        case "buscarDescricao":
+            quadroDicas.innerHTML = ""
+            montarLista(listaBuscaDescricao)
+            break
+        default:
+            quadroDicas.innerHTML = ""
+            montarLista(listaDefault)
+            break;
     }
-    
+
 }
 
 function fecharBusca() {
     quadroDicas.innerHTML = ""
-    tipoBusca.value=null
-    pesquisa.value=null
+    tipoBusca.value = null
+    pesquisa.value = null
     montarLista(listaDicas)
 }
 
-function destaque(indice){
+function destaque(indice) {
     const dicaDestaque = listaDicas.filter((item) => item === indice)
-    //listaDicas[0]=dicaDestaque[0]
     const outrasDicas = listaDicas.filter((item) => item !== indice)
     listaDicas = [...dicaDestaque, ...outrasDicas]
-    // for (let i = 0; i++; listaDicas.lenght)
-    // {
-
-    //     outrasDicas[i+1].objTitulo=outrasDicas[i].objTitulo
-    //     console.log(outrasDicas[i])
-    // }
-    
-   
-
-    // salvarDicas()
     montarLista(listaDicas)
     console.log(listaDicas)
 
@@ -349,7 +306,6 @@ function salvarDicas() {
     const listaDicasJSON = JSON.stringify(listaDicas)
     localStorage.setItem("listaDicas", listaDicasJSON)
 }
-
 
 function carregarDicas() {
     const listaSalvaJSON = localStorage.getItem("listaDicas")
@@ -361,9 +317,6 @@ function carregarDicas() {
 }
 
 btnLimpar.addEventListener("click", limparCampos)
-btnSalvar.addEventListener("click", (event) => {
-    event.preventDefault()
-    validarFormulario()
-})
+btnSalvar.addEventListener("click", validarFormulario)
 btnBuscar.addEventListener("click", buscarDica)
 btnLimparBusca.addEventListener("click", fecharBusca)

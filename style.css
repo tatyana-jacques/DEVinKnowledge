@@ -1,43 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
 
 :root {
-    --primary-color: #D92344;
-    --secondary-color: #9f8bbb;
-    --tertiary-color: #F29B30;
+    --primary-color: #9f8bbb;
     --primary-bg-color: #F5F5F5;
     --secondary-bg-color: #f8e9c1;
     --tertiary-bg-color: #f5bec8;
-    --border-color: #A4B5BF;
     --font-color: #252526;
 }
 
 * {
     font-family: 'Titillium Web', sans-serif;
-    ;
-    color: var(--font-color)
+    color: var(--font-color);
 }
 
-body {
+body{
+    background-color: var(--tertiary-bg-color);
+}
+
+#container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 20px;
-    background-color: var(--tertiary-bg-color);
+    padding:20px;
+}
+
+#container div {
+    display: flex;
+   border-right:20px;
+    margin: 15px;
+    border-radius: 10px;  
 }
 
 #direita {
-    display: flex;
     flex-direction: column;
-    align-items: flex-start;
     width: 450px;
     height: 800px;
     padding: 0px;
-    background-color: var(--secondary-color);
-    padding: 20px;
-    border-radius: 10px;
-    margin: 10px;
-    border-style: dotted;
-    border-color: var(--primary-color) ;
+    background-color: var(--primary-color);
 }
 
 #cabeçalho {
@@ -55,20 +55,15 @@ h1 {
 }
 
 span {
-    font-size: 50px;
+    font-size: 45px;
 }
 
 #formulario {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     height: 88%;
     overflow: hidden;
-}
-
-form {
-    border-radius: 0px;
 }
 
 form,
@@ -123,46 +118,39 @@ textarea {
     flex-direction: column;
     width: 450px;
     height: 800px;
-    margin: 10px;
-    padding: 20px;
     background-color: var(--secondary-bg-color);
-    border-radius: 15px;
-    border-style: dotted;
-    border-color: var(--primary-color) ;
 }
 
-#tipoBusca  {
-    margin: 10px 20px;
-    width: 50%;
+#cabecalhoEsq{
+    display: flex;
+    margin: 30px 30px;
     border-style: none;
+    align-items: flex-center;
+}
+
+#buscar {
+    display: flex; 
+    flex-direction: column;
+    width: 80%;
    
 }
-#buscar {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    align-items: flex-start;
-    height:30px;
+#buscar input {
+    margin-bottom:15px;
 }
 
-#pesquisar {
-    height: 45px;
-}
-
-#lupa {
+#botoesBusca{
+    display:flex;
+    flex-direction: column;
     width: 48px;
     height: 48px;
     margin: 0px 10px;
 }
+   #lupa {
+    margin-bottom:10px;
+   }
 
 #lupa>img {
     width: 30px;
-}
-
-#fechar {
-    width: 48px;
-    height: 48px;
-    margin: 0px 10px;
 }
 
 #fechar>img {
@@ -174,17 +162,16 @@ textarea {
     justify-content:flex-start;
     align-content:center;
     flex-wrap: wrap;
-    height: 40px;
     padding:20px;
-    
+    max-height: 60px;
 }
 
 #numeros li {
-    width: 80px;
+    width: 70px;
+    font-size:13px;
     text-align: center;
     border-radius: 15px;
     margin: 5px;
-    padding:0px;
     background-color: var(--primary-bg-color);
 }
 
@@ -206,7 +193,7 @@ textarea {
     overflow-x: hidden;
     border-radius: 15px;
     padding: 10px;
-    margin: 10px;
+    margin: 0px 10px 20px 10px;;
 }
 
 .cartao {
