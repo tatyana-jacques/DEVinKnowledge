@@ -11,8 +11,9 @@ const btnBuscar = document.getElementById("lupa")
 const btnLimparBusca = document.getElementById("fechar")
 const tipoBusca = document.getElementById("tipoBusca")
 const ulNumeros = document.getElementById("numeros")
-
 let listaDicas = []
+let editandoItens = false
+let indiceEditado = null
 
 carregarDicas()
 
@@ -30,14 +31,16 @@ function validarFormulario() {
     else if (docDescricao.value === "") {
         alert("Preencha o campo descrição!")
     }
-    else if (docVideo.value !== "" && !docVideo.value.includes("https://www.youtube.com")) {
+    else if (docVideo.value !== "" && !docVideo.value.includes("https://www.youtube")) {
         alert("O link deve levar ao YouTube!")
     }
 
     else {
         atualizarFormulario()
-        setTimeout(() => alert("Cartão salvo com sucesso!"), 100)
     }
+
+   
+
 }
 
 function atualizarFormulario() {
@@ -49,9 +52,17 @@ function atualizarFormulario() {
         objVideo: docVideo.value
     }
 
-    listaDicas.push(linha)
+    if (editandoItens === false) {
+        listaDicas.push(linha)
+        montarLista(listaDicas)
+        setTimeout(() => alert("Cartão salvo com sucesso!"), 100)
+    }
 
-    montarLista(listaDicas)
+    else {
+        salvarEditado(indiceEditado)
+    }
+
+
     limparCampos()
 }
 
@@ -59,7 +70,7 @@ function montarLista(lista) {
 
     quadroDicas.innerHTML = " "
 
-    lista.forEach((item) => {
+    lista.forEach((item, i) => {
         const cartao = document.createElement("li")
         cartao.classList.add('cartao')
 
@@ -90,7 +101,7 @@ function montarLista(lista) {
         deletar.classList.add("btnDeletar")
 
         const destacar = document.createElement("button")
-        destacar.innerText = "Destacar"
+        destacar.innerText = "Para o topo"
         destacar.classList.add("btnDestacar")
 
         cartao.appendChild(novoTitulo)
@@ -108,7 +119,7 @@ function montarLista(lista) {
         }
 
         deletar.addEventListener("click", (() => { removerCartao(item) }))
-        editar.addEventListener("click", (() => editarCartao(item)))
+        editar.addEventListener("click", (() => { editarCartao(item, i) }))
         destacar.addEventListener("click", (() => { destaque(item) }))
         novoVideo.addEventListener("click", () => window.open(item.objVideo))
     })
@@ -222,23 +233,31 @@ function limparCampos() {
     docVideo.value = null
 }
 
-function editarCartao(indice) {
+function editarCartao(indice, i) {
+
     const resposta = confirm("Você tem certeza que deseja editar essa dica?")
+    editandoItens = true
 
     if (resposta) {
-        listaDicas.find((item) => {
-            (item === indice)
-            document.getElementById("titulo").value = item.objTitulo
-            document.getElementById("linguagem").value = item.objLinguagem
-            document.getElementById("categoria").value = item.objCategoria
-            document.getElementById("descricao").value = item.objDescricao
-            document.getElementById("video").value = item.objVideo
-        })
 
-        listaDicas = listaDicas.filter((item) => item !== indice)
-        salvarDicas()
-        montarLista(listaDicas)
+        const itemEditar = listaDicas.find((item) => (item === indice))
+        document.getElementById("titulo").value = itemEditar.objTitulo
+        document.getElementById("linguagem").value = itemEditar.objLinguagem
+        document.getElementById("categoria").value = itemEditar.objCategoria
+        document.getElementById("descricao").value = itemEditar.objDescricao
+        document.getElementById("video").value = itemEditar.objVideo
+        indiceEditado = i
+        return indiceEditado
     }
+}
+
+function salvarEditado(indice) {
+    listaDicas[indice].objTitulo = document.getElementById("titulo").value
+    listaDicas[indice].objLinguagem = document.getElementById("linguagem").value
+    listaDicas[indice].objCategoria = document.getElementById("categoria").value
+    listaDicas[indice].objDescricao = document.getElementById("descricao").value
+    listaDicas[indice].objVideo = document.getElementById("video").value
+    montarLista(listaDicas)
 }
 
 function buscarDica() {
@@ -298,8 +317,6 @@ function destaque(indice) {
     const outrasDicas = listaDicas.filter((item) => item !== indice)
     listaDicas = [...dicaDestaque, ...outrasDicas]
     montarLista(listaDicas)
-    console.log(listaDicas)
-
 }
 
 function salvarDicas() {
@@ -317,6 +334,9 @@ function carregarDicas() {
 }
 
 btnLimpar.addEventListener("click", limparCampos)
-btnSalvar.addEventListener("click", validarFormulario)
+btnSalvar.addEventListener("click", ((event) => {
+    event.preventDefault()
+    validarFormulario()
+}))
 btnBuscar.addEventListener("click", buscarDica)
 btnLimparBusca.addEventListener("click", fecharBusca)
