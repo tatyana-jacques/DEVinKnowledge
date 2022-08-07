@@ -31,15 +31,13 @@ function validarFormulario() {
     else if (docDescricao.value === "") {
         alert("Preencha o campo descrição!")
     }
-    else if (docVideo.value !== "" && !docVideo.value.includes("https://www.youtube")) {
+    else if (docVideo.value !== "" && !docVideo.value.includes("https://www.youtube.com")) {
         alert("O link deve levar ao YouTube!")
     }
 
     else {
         atualizarFormulario()
     }
-
-   
 
 }
 
@@ -258,6 +256,9 @@ function salvarEditado(indice) {
     listaDicas[indice].objDescricao = document.getElementById("descricao").value
     listaDicas[indice].objVideo = document.getElementById("video").value
     montarLista(listaDicas)
+    setTimeout(() => alert("Cartão editado com sucesso!"), 100)
+    editandoItens = false
+
 }
 
 function buscarDica() {
