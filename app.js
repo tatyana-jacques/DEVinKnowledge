@@ -279,7 +279,8 @@ function buscarDica() {
         .toLocaleLowerCase()
         .includes(pesquisa.value.toLocaleLowerCase()))
 
-    const listaDefault = [...listaBuscaTitulo, ...listaBuscaLinguagem, ...listaBuscaCategoria, ...listaBuscaDescricao]
+    const listaTodosOsCampos = [...listaBuscaTitulo, ...listaBuscaLinguagem, ...listaBuscaCategoria, ...listaBuscaDescricao]
+    const listaDefault = [... new Set (listaTodosOsCampos)]
 
     switch (tipoBusca.value) {
         case "buscarTitulo":
