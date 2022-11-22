@@ -36,7 +36,7 @@
 
 <br>
 
-<p>On the right side of the page there is a field to search for a tip, a dynamic panel with the amount of each tip category, and the list of tip cards.</p>
+<p>On the right side of the page there is a field to search for a tip, a dynamic panel with the tip amount of each category, and the list of tip cards.</p>
 
 <br>
 
